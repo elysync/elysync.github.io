@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>elysync | See & Control</title>
+  <meta name="description" content="elysync — 비디오 영상을 분석하여 IoT 기기와 로봇을 제어하는 ‘See & Control’ 기술 연구 기업" />
+  <meta property="og:title" content="elysync | See & Control" />
+  <meta property="og:description" content="Video analytics to control IoT devices and robots. Research company pioneering ‘See & Control’." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.elysync.com/" />
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%23101014'/%3E%3Ctext x='50%25' y='50%25' fill='%23c7ff6b' font-family='Inter,Arial,sans-serif' font-size='96' text-anchor='middle' dominant-baseline='central'%3Eelysync%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b10;
+      --panel: #111118;
+      --muted: #9aa0a6;
+      --text: #e8eaed;
+      --accent: #c7ff6b;
+      --accent-2: #6bc7ff;
+      --ring: 0 0 0 3px rgba(199, 255, 107, 0.25);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text);
+      background: radial-gradient(1200px 600px at 80% -20%, rgba(107,199,255,.15), transparent 60%),
+                  radial-gradient(900px 500px at -10% 20%, rgba(199,255,107,.10), transparent 60%),
+                  var(--bg);
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+    header { position: sticky; top: 0; backdrop-filter: saturate(140%) blur(8px); background: color-mix(in oklab, var(--bg), #000 10% / 65%); border-bottom: 1px solid #1d1d24; z-index: 20; }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .brand { display:flex; align-items:center; gap:10px; }
+    .logo { width: 36px; height: 36px; }
+    .wordmark { font-weight: 800; letter-spacing: 0.5px; font-size: 1.1rem; }
+    .nav-links { display: flex; gap: 18px; align-items: center; }
+    .pill { padding: 8px 14px; border-radius: 999px; background: #16161f; border: 1px solid #21212b; color: var(--muted); font-size:.9rem; }
+    .cta { padding: 10px 16px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), #97f95c); color: #0a0a0d; font-weight: 700; border: none; cursor: pointer; }
+    .cta:hover { filter: brightness(1.05); }
+    .lang { appearance: none; background: #16161f; border: 1px solid #262634; color: var(--text); padding: 8px 12px; border-radius: 10px; }
+    main { display: grid; gap: 56px; }
+
+    .hero { padding: 72px 0 24px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center; }
+    .title { font-size: clamp(2rem, 4.5vw, 4rem); line-height: 1.07; letter-spacing: -0.02em; }
+    .lead { color: var(--muted); font-size: clamp(1rem, 1.2vw, 1.15rem); }
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+    .card { background: linear-gradient(180deg, #13131a, #0f0f15); border: 1px solid #1f2030; border-radius: 16px; padding: 18px; }
+    .card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .viz {
+      aspect-ratio: 16/10;
+      background: radial-gradient(500px 220px at 70% 10%, rgba(107,199,255,.28), transparent 50%),
+                  radial-gradient(500px 220px at 20% 70%, rgba(199,255,107,.22), transparent 50%),
+                  #0d0d13;
+      border: 1px solid #1c1c28; border-radius: 16px; position: relative; overflow: hidden;
+    }
+    .scan { position: absolute; inset: 0; background: repeating-linear-gradient( to bottom, rgba(199,255,107,.0) 0, rgba(199,255,107,.04) 2px, rgba(199,255,107,.0) 4px); animation: scan 6s linear infinite; opacity:.6 }
+    @keyframes scan { from { transform: translateY(-100%);} to { transform: translateY(100%);} }
+    .orb { position:absolute; width: 360px; height: 360px; border-radius: 50%; filter: blur(30px); background: radial-gradient(circle at 30% 30%, rgba(199,255,107,.35), transparent 60%); top: -80px; right: -120px; }
+    .mesh { position:absolute; inset:0; background-image: url('data:image/svg+xml;utf8, %3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 120%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 x2=%221%22%3E%3Cstop stop-color=%22%239aa0a6%22 stop-opacity=%220.22%22/%3E%3Cstop stop-color=%22%236bc7ff%22 stop-opacity=%220.28%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M0,80 C30,70 40,40 70,50 C100,60 120,30 160,40 C190,48 200,30 220,34%22 fill=%22none%22 stroke=%22url(%23g)%22 stroke-width=%222%22/%3E%3C/svg%3E'); background-size: 140% 100%; background-repeat:no-repeat; mix-blend-mode: screen; opacity:.5 }
+
+    section { padding: 12px 0 24px; }
+    .section-title { font-size: 1.4rem; margin: 0 0 12px; }
+
+    .contact { display:grid; grid-template-columns: 1.2fr .8fr; gap: 20px; align-items: center; }
+    .contact .panel { background: var(--panel); border:1px solid #1f2030; border-radius: 16px; padding: 18px; }
+    .contact a.mail { display:inline-flex; align-items:center; gap:8px; padding: 10px 14px; border:1px solid #2b2b38; border-radius: 10px; background:#12121a; }
+    .contact small { color: var(--muted); }
+
+    footer { color: var(--muted); border-top:1px solid #1d1d24; padding: 28px 0 44px; }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; gap: 22px; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      .contact { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 10px; }
+      .pill { display:none; }
+    }
+
+    /* Focus styles */
+    :focus-visible { outline: none; box-shadow: var(--ring); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="elysync home">
+        <!-- Inline SVG logo -->
+        <svg class="logo" viewBox="0 0 100 100" role="img" aria-label="elysync logo">
+          <defs>
+            <linearGradient id="L" x1="0" x2="1">
+              <stop offset="0" stop-color="#c7ff6b"/>
+              <stop offset="1" stop-color="#6bc7ff"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="100" height="100" rx="20" fill="#0f0f17"/>
+          <path d="M18 60 Q50 20 82 60" fill="none" stroke="url(#L)" stroke-width="10" stroke-linecap="round"/>
+          <circle cx="50" cy="60" r="10" fill="url(#L)"/>
+        </svg>
+        <span class="wordmark">elysync</span>
+      </a>
+      <nav class="nav-links">
+        <a class="pill" href="#about" data-i18n="nav_about">회사 소개</a>
+        <a class="pill" href="#tech" data-i18n="nav_tech">기술</a>
+        <a class="pill" href="#contact" data-i18n="nav_contact">문의</a>
+        <select id="lang" class="lang" aria-label="Language">
+          <option value="ko" selected>한국어</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+        <a class="cta" href="#contact" data-i18n="cta">상담 문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <section class="hero" aria-label="Hero">
+      <div>
+        <div class="pill" style="display:inline-block;margin-bottom:10px" data-i18n="agenda">메인 아젠다: See &amp; Control</div>
+        <h1 class="title" data-i18n="hero_title">비디오를 보고(See), 현실을 제어(Control)하다</h1>
+        <p class="lead" data-i18n="hero_lead">elysync는 비디오 영상을 분석하여 IoT 기기와 로봇을 제어하는 기술을 연구하는 기업입니다. 컴퓨터 비전과 제어공학을 접목해, 카메라로 포착한 상황을 실시간으로 이해하고 정밀한 구동 명령으로 연결합니다.</p>
+        <div style="display:flex; gap:12px; margin-top:18px">
+          <a class="cta" href="#tech" data-i18n="btn_learn">자세히 보기</a>
+          <a class="mail cta" style="background:#171722;color:var(--text);border:1px solid #2b2b38" href="mailto:ely@elysync.com" aria-label="email">
+            <span data-i18n="btn_contact">이메일 문의</span>
+          </a>
+        </div>
+      </div>
+      <div class="viz" aria-hidden="true">
+        <div class="orb"></div>
+        <div class="scan"></div>
+        <div class="mesh"></div>
+        <!-- pseudo-UI overlay -->
+        <svg viewBox="0 0 800 500" style="position:absolute; inset: 0; opacity:.9">
+          <g fill="none" stroke="#2a2f3a" stroke-width="2">
+            <rect x="30" y="36" width="740" height="120" rx="12"/>
+            <rect x="30" y="176" width="740" height="120" rx="12"/>
+            <rect x="30" y="316" width="740" height="120" rx="12"/>
+          </g>
+          <g stroke="#6bc7ff" stroke-width="2">
+            <polyline points="60,96 200,96 280,66"/>
+            <polyline points="60,236 240,236 320,206"/>
+            <polyline points="60,376 280,376 360,346"/>
+          </g>
+          <g fill="#c7ff6b">
+            <circle cx="640" cy="96" r="6"/>
+            <circle cx="640" cy="236" r="6"/>
+            <circle cx="640" cy="376" r="6"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title" data-i18n="about_title">회사 소개</h2>
+      <p class="lead" data-i18n="about_desc">elysync는 ‘See &amp; Control’을 핵심 아젠다로 삼아, 영상 인식(Detection/Tracking/Segmentation)과 제어 시스템(PLC/ROS/MCU)을 유기적으로 결합합니다. 연구 성과는 스마트 팩토리, 서비스 로보틱스, 원격 조작, 안전·보안 모니터링 등 다양한 현장에 적용됩니다.</p>
+      <div class="grid">
+        <div class="card"><h3 data-i18n="f1_h">실시간 비전</h3><p data-i18n="f1_p">저지연 파이프라인으로 객체 상태를 추론하고 이벤트를 트리거합니다.</p></div>
+        <div class="card"><h3 data-i18n="f2_h">정밀 제어</h3><p data-i18n="f2_p">모션 프로파일·폐루프 제어로 서보/스텝/액추에이터를 안정적으로 구동.</p></div>
+        <div class="card"><h3 data-i18n="f3_h">엣지·클라우드</h3><p data-i18n="f3_p">엣지 디바이스에서 클라우드 오케스트레이션까지 유연한 배포.</p></div>
+      </div>
+    </section>
+
+    <section id="tech">
+      <h2 class="section-title" data-i18n="tech_title">기술 스택</h2>
+      <div class="grid">
+        <div class="card"><h3>Vision</h3><p>CV/AI (Detection, Pose, Segmentation), Multi-camera fusion, SLAM</p></div>
+        <div class="card"><h3>Control</h3><p>ROS/ROS2, PLC, MCU (STM32/ESP32), PID/Model Predictive Control</p></div>
+        <div class="card"><h3>Systems</h3><p>gRPC/MQTT/WebRTC, Docker/K8s, Edge TPU/NPU, RTSP/RTMP</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="panel">
+        <h2 class="section-title" data-i18n="contact_title">문의</h2>
+        <p class="lead" data-i18n="contact_desc">협업·연구 제안, PoC 및 파트너십 문의를 환영합니다.</p>
+        <a class="mail" href="mailto:ely@elysync.com">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="#6bc7ff"/><path d="m4 7 8 6 8-6" stroke="#c7ff6b"/></svg>
+          <strong>ely@elysync.com</strong>
+        </a>
+        <div style="margin-top:8px"><small data-i18n="contact_note">업무시간 기준 1~2 영업일 내 회신드립니다.</small></div>
+      </div>
+      <div class="panel" aria-hidden="true">
+        <!-- Decorative/Illustrative canvas-like SVG -->
+        <svg viewBox="0 0 600 360" style="width:100%;height:auto;display:block">
+          <defs>
+            <linearGradient id="gA" x1="0" x2="1">
+              <stop offset="0" stop-color="#6bc7ff" stop-opacity="0.35"/>
+              <stop offset="1" stop-color="#c7ff6b" stop-opacity="0.35"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="600" height="360" rx="16" fill="#0f0f17"/>
+          <g fill="none" stroke="url(#gA)">
+            <circle cx="140" cy="120" r="60"/>
+            <rect x="250" y="70" width="120" height="100" rx="10"/>
+            <path d="M370 120h80"/>
+            <path d="M220 250 C260 200 340 200 380 250"/>
+            <circle cx="430" cy="250" r="30"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <div>© <span id="y"></span> elysync. <span data-i18n="foot_rights">All rights reserved.</span></div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="#about" class="pill" style="padding:6px 10px" data-i18n="foot_about">About</a>
+        <a href="#tech" class="pill" style="padding:6px 10px" data-i18n="foot_tech">Tech</a>
+        <a href="#contact" class="pill" style="padding:6px 10px" data-i18n="foot_contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // dynamic year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // i18n dictionary
+    const dict = {
+      en: {
+        nav_about: 'About', nav_tech: 'Tech', nav_contact: 'Contact', cta: 'Get in touch',
+        agenda: 'Main Agenda: See & Control',
+        hero_title: 'See the world, then Control it',
+        hero_lead: 'elysync researches technology that analyzes video to control IoT devices and robots. We connect computer vision with control engineering for real-time understanding and precise actuation.',
+        btn_learn: 'Learn more', btn_contact: 'Email us',
+        about_title: 'About',
+        about_desc: "With 'See & Control' as our core agenda, elysync fuses visual recognition (detection/tracking/segmentation) with control systems (PLC/ROS/MCU). Our research powers smart factories, service robotics, teleoperation, and safety/security.",
+        f1_h: 'Realtime Vision', f1_p: 'Low-latency pipeline to infer object state and trigger events.',
+        f2_h: 'Precision Control', f2_p: 'Motion profiles and closed-loop control for reliable actuation.',
+        f3_h: 'Edge & Cloud', f3_p: 'Flexible deployments from edge devices to cloud orchestration.',
+        tech_title: 'Tech Stack',
+        contact_title: 'Contact', contact_desc: 'We welcome collaboration, research proposals, PoC and partnerships.',
+        contact_note: 'We typically respond within 1–2 business days.',
+        foot_rights: 'All rights reserved.', foot_about: 'About', foot_tech: 'Tech', foot_contact: 'Contact',
+      },
+      ja: {
+        nav_about: '会社概要', nav_tech: '技術', nav_contact: 'お問い合わせ', cta: '相談する',
+        agenda: 'メインアジェンダ：See & Control',
+        hero_title: '世界を「見る」。そして「制御」する。',
+        hero_lead: 'elysyncは、映像を解析してIoT機器やロボットを制御する技術を研究しています。コンピュータビジョンと制御工学を融合し、リアルタイム認識から精密な駆動命令まで一貫して繋ぎます。',
+        btn_learn: '詳しく見る', btn_contact: 'メールで問い合わせ',
+        about_title: '会社概要',
+        about_desc: '「See & Control」をコアアジェンダとして、認識（検出・追跡・セグメンテーション）と制御システム（PLC/ROS/MCU）を有機的に結合。スマートファクトリー、サービスロボット、遠隔操作、安全・セキュリティなどへ応用します。',
+        f1_h: 'リアルタイム・ビジョン', f1_p: '低遅延パイプラインで状態を推論し、イベントをトリガー。',
+        f2_h: '精密制御', f2_p: 'モーションプロファイルと閉ループ制御で安定駆動。',
+        f3_h: 'エッジ＆クラウド', f3_p: 'エッジからクラウドオーケストレーションまで柔軟に展開。',
+        tech_title: '技術スタック',
+        contact_title: 'お問い合わせ', contact_desc: '共同研究・PoC・パートナーシップのご相談をお待ちしています。',
+        contact_note: '通常1〜2営業日以内にご返信します。',
+        foot_rights: 'All rights reserved.', foot_about: '会社概要', foot_tech: '技術', foot_contact: 'お問い合わせ',
+      },
+      ko: {
+        nav_about: '회사 소개', nav_tech: '기술', nav_contact: '문의', cta: '상담 문의',
+        agenda: '메인 아젠다: See & Control',
+        hero_title: '비디오를 보고(See), 현실을 제어(Control)하다',
+        hero_lead: 'elysync는 비디오 영상을 분석하여 IoT 기기와 로봇을 제어하는 기술을 연구하는 기업입니다. 컴퓨터 비전과 제어공학을 접목해, 카메라로 포착한 상황을 실시간으로 이해하고 정밀한 구동 명령으로 연결합니다.',
+        btn_learn: '자세히 보기', btn_contact: '이메일 문의',
+        about_title: '회사 소개',
+        about_desc: 'elysync는 ‘See & Control’을 핵심 아젠다로 삼아, 영상 인식(Detection/Tracking/Segmentation)과 제어 시스템(PLC/ROS/MCU)을 유기적으로 결합합니다. 연구 성과는 스마트 팩토리, 서비스 로보틱스, 원격 조작, 안전·보안 모니터링 등 다양한 현장에 적용됩니다.',
+        f1_h: '실시간 비전', f1_p: '저지연 파이프라인으로 객체 상태를 추론하고 이벤트를 트리거합니다.',
+        f2_h: '정밀 제어', f2_p: '모션 프로파일·폐루프 제어로 서보/스텝/액추에이터를 안정적으로 구동.',
+        f3_h: '엣지·클라우드', f3_p: '엣지 디바이스에서 클라우드 오케스트레이션까지 유연한 배포.',
+        tech_title: '기술 스택',
+        contact_title: '문의', contact_desc: '협업·연구 제안, PoC 및 파트너십 문의를 환영합니다.',
+        contact_note: '업무시간 기준 1~2 영업일 내 회신드립니다.',
+        foot_rights: 'All rights reserved.', foot_about: '회사 소개', foot_tech: '기술', foot_contact: '문의',
+      }
+    }
+
+    function setLang(l){
+      const t = dict[l] || dict.ko
+      document.documentElement.lang = l
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n
+        if (t[key]) el.textContent = t[key]
+      })
+      // Update title/description per language
+      const metaDesc = document.querySelector('meta[name="description"]')
+      if (l === 'en') {
+        document.title = 'elysync | See & Control'
+        metaDesc && (metaDesc.content = 'elysync — Researching video analytics to control IoT devices and robots.')
+      } else if (l === 'ja') {
+        document.title = 'elysync | See & Control'
+        metaDesc && (metaDesc.content = 'elysync — 映像を解析し、IoT機器やロボットを制御する技術を研究する企業。')
+      } else {
+        document.title = 'elysync | See & Control'
+        metaDesc && (metaDesc.content = 'elysync — 비디오 영상을 분석하여 IoT 기기와 로봇을 제어하는 기술을 연구하는 기업')
+      }
+      localStorage.setItem('elysync_lang', l)
+    }
+
+    const select = document.getElementById('lang')
+    select.addEventListener('change', e => setLang(e.target.value))
+    const saved = localStorage.getItem('elysync_lang') || (navigator.language||'ko').slice(0,2)
+    if(['en','ja','ko'].includes(saved)) select.value = saved
+    setLang(select.value)
+  </script>
+</body>
+</html>
