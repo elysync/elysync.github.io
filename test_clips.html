@@ -90,7 +90,22 @@
         .category-group.cat-3 button:hover { background-color: #d39e00; }
         .category-group.cat-4 button { background-color: #dc3545; }
         .category-group.cat-4 button:hover { background-color: #b02a37; }
-        /* --- CSS 끝 --- */
+
+        @media (max-width: 820px) {
+            #videoPlayer {
+                width: 400px;
+                height: 230px;
+            }
+            .player-container {
+                width: 100%;
+            }
+            .controls-container {
+                flex-direction: column;
+                max-width: 100%;
+                overflow-y: auto;
+                height: 400px;
+            }
+        }
     </style>
 </head>
 <body>
