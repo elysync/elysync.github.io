@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-msg {
+            color: red;
+            font-size: 12px;
+            display: none;
+            margin-bottom: 10px;
+        }
+
+        #main-content {
+            display: none;
+            text-align: center;
+        }
+    </style>
+    <style>
+        #toon_img {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            display: block;
+        }
+
+        video {
+            width: 690px;
+        }
+
+        /* Scroll Indicator Animation */
+        .scroll-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bounce 2s infinite;
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+        .scroll-text {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border-right: 5px solid #333;
+            border-bottom: 5px solid #333;
+            transform: rotate(45deg);
+            margin-bottom: 10px;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-20px);
+            }
+
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="login-section">
+        <h2>로그인</h2>
+        <div id="errorMsg" class="error-msg">아이디 또는 비밀번호가 잘못되었습니다.</div>
+        <input type="text" id="username" placeholder="아이디" required>
+        <input type="password" id="password" placeholder="비밀번호" required>
+        <button onclick="handleLogin()">로그인</button>
+    </div>
+
+    <script>
+        const CORRECT_ID = "admin";
+        const CORRECT_PW = "1234";
+
+        // crypto.subtle API requires a Secure Context (HTTPS or localhost).
+        // For broader compatibility in local/dev environments (like accessing via IP on Android),
+        // we switch to direct password comparison.
+        function handleLogin() {
+            const idInput = document.getElementById('username').value;
+            const pwInput = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (!idInput || !pwInput) {
+                alert("아이디와 비밀번호를 모두 입력해주세요.");
+                return;
+            }
+
+            if (idInput === CORRECT_ID && pwInput === CORRECT_PW) {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.body.style.backgroundColor = '#fff';
+                document.body.style.height = 'auto';
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        }
+
+        document.getElementById('password').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        });
+    </script>
+
+    <div id="main-content" style="zoom: 0.4">
+        <!-- <div id="scroll-popup-overlay">
+            <div id="scroll-popup-content">
+                <div id="scroll-popup-text">화면을 아래로 스크롤해주세요</div>
+                <button id="scroll-popup-btn">확인</button>
+            </div>
+        </div> -->
+        <div style="height: 1600px; display: flex; align-items: center; justify-content: center;">
+            <div class="scroll-indicator" onclick="window.scrollBy({top: window.innerHeight, behavior: 'smooth'});">
+                <div class="scroll-text">아래로 스크롤</div>
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
+        <div id="toon_img">
+            <!-- <img alt="마인드 컨트롤 8화 - 웹툰 이미지 1" src="./135025e/17671062765584_0772.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 2" src="./135025e/17671062768004_0473.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 3" src="./135025e/17671062770513_0237.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 4" src="./135025e/17671062773025_0489.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 5" src="./135025e/17671062775463_0864.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 6" src="./135025e/17671062777865_0763.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 7" src="./135025e/17671062780336_0579.jpeg"> -->
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 8" src="./135025e/17671062782823_0107.jpeg">
+                <video src="./135025e/video/video_00001.mp4" autoplay muted playsinline loop
+                    style="position: absolute; top: 0; left: 0; z-index: 1;"></video>
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 9" src="./135025e/1767106278528_0954.jpeg">
+                <video src="./135025e/video/video_00002(4).mp4" autoplay muted playsinline loop
+                    style="position: absolute; top: 0; left: 0; z-index: 1;"></video>
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 10" src="./135025e/17671062787727_0233.jpeg" style="margin-top: -342px;">
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 11" src="./135025e/17671062790124_0031.jpeg">
+                <video src="./135025e/video/video_00002 (3).mp4" autoplay muted playsinline loop
+                    style="position: absolute; top: 1073px; left: 8px; z-index: 1;"></video>
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 12" src="./135025e/17671062792564_0490.jpeg">
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 13" src="./135025e/17671062795074_0206.jpeg">
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 14" src="./135025e/1767106279814_0379.jpeg">
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 15" src="./135025e/17671062800572_0758.jpeg">
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 16" src="./135025e/17671062802986_0541.jpeg">
+                <video src="./135025e/video/video_00003.mp4" autoplay muted playsinline loop
+                    style="position: absolute; top: 736px; left: 0; z-index: 1;"></video>
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 17" src="./135025e/17671062805423_0232.jpeg">
+                <video src="./135025e/video/video_00004.mp4" autoplay muted playsinline loop
+                    style="position: absolute; top: 766px; left: 0; z-index: 1;"></video>
+            </div>
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 18" src="./135025e/17671062807841_0075.jpeg">
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 19" src="./135025e/1767106281033_0212.jpeg">
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 20" src="./135025e/17671062812758_0279.jpeg">
+                <video src="./135025e/video/video_00006.mp4" autoplay muted playsinline loop
+                    style="position: absolute; top: 0; left: 0; z-index: 1;"></video>
+            </div>
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 21" src="./135025e/17671062815149_0775.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 22" src="./135025e/1767106281767_0757.jpeg">
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 23" src="./135025e/1767106282007_0967.jpeg">
+                <video src="./135025e/video/video_00005.mp4" autoplay muted playsinline loop
+                    style="position: absolute; top: 0; left: 0; z-index: 1;"></video>
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 24" src="./135025e/17671062822474_0744.jpeg">
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 25" src="./135025e/17671062824912_0746.jpeg">
+            </div>
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 26" src="./135025e/17671062827422_0858.jpeg">
+                <video src="./135025e/video/video_00007.mp4" autoplay muted playsinline loop
+                    style="position: absolute; top: 0; left: 0; z-index: 1;"></video>
+            </div>
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 27" src="./135025e/17671062829921_0090.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 28" src="./135025e/17671062832377_0073.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 29" src="./135025e/17671062834962_0586.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 30" src="./135025e/17671062837403_0624.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 31" src="./135025e/17671062839698_0103.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 32" src="./135025e/17671062842232_0111.jpeg">
+            <!--
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 33" src="./135025e/17671062844641_0276.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 34" src="./135025e/176710628471_0918.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 35" src="./135025e/1767106284971_0900.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 36" src="./135025e/17671062852147_0921.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 37" src="./135025e/17671062854608_0950.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 38" src="./135025e/17671062857182_0234.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 39" src="./135025e/17671062859647_0654.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 40" src="./135025e/17671062862096_0088.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 41" src="./135025e/17671062864483_0285.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 42" src="./135025e/17671062866844_0333.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 43" src="./135025e/17671062869243_0701.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 44" src="./135025e/1767106287172_0929.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 45" src="./135025e/17671062874202_0145.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 46" src="./135025e/17671062876618_0438.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 47" src="./135025e/17671062879101_0564.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 48" src="./135025e/1767106288151_0670.jpeg">
+            -->
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 49" src="./135025e/17671062883935_0129.jpeg">
+            <div style="position: relative;">
+                <img alt="마인드 컨트롤 8화 - 웹툰 이미지 50" src="./135025e/17671062886455_0731.jpeg">
+                <video src="./135025e/video/video_00008 (1).mp4" autoplay muted playsinline loop
+                    style="position: absolute; top: 207px; left: 0; z-index: 1;"></video>
+            </div>
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 51" src="./135025e/17671062889017_0564.jpeg">
+            <img alt="마인드 컨트롤 8화 - 웹툰 이미지 52" src="./135025e/17671062891375_0833.jpeg">
+        </div>
+        <script>
+            // 1. 옵션 설정
+            const options = {
+                root: null, // 뷰포트(화면)를 기준으로 함
+                rootMargin: '0px',
+                threshold: 0.1 // 화면에 50% 이상 보일 때 작동 (0.0 ~ 1.0)
+            };
+
+            // 2. 콜백 함수: 상황 변화 시 실행될 로직
+            const callback = (entries, observer) => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+
+                    if (entry.isIntersecting) {
+                        // 화면에 들어왔을 때 (Play)
+                        video.play().catch(error => {
+                            console.log("재생 방지됨(사용자 인터랙션 필요 혹은 코덱 문제):", error);
+                        });
+                    } else {
+                        // 화면에서 나갔을 때 (Pause)
+                        video.pause();
+                    }
+                });
+            };
+
+            // 3. 관찰자(Observer) 생성
+            const observer = new IntersectionObserver(callback, options);
+
+            // 4. 비디오 요소 선택 및 관찰 시작
+            // 여러 개의 비디오에도 적용되도록 querySelectorAll 사용
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                observer.observe(video);
+            });
+
+            // Popup Close Functionality
+            const popupBtn = document.getElementById('scroll-popup-btn');
+            const popupOverlay = document.getElementById('scroll-popup-overlay');
+
+            if (popupBtn && popupOverlay) {
+                popupBtn.addEventListener('click', () => {
+                    popupOverlay.style.display = 'none';
+                });
+            }
+        </script>
+    </div>
+</body>
+
+</html>
